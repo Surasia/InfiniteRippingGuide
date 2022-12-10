@@ -60,3 +60,23 @@ You will now see that the model you chose has been imported.
 ![](https://user-images.githubusercontent.com/74399067/206868308-dd53579d-7989-415f-b820-4f10c54d3fdc.gif)
 
 ## Fixing Up Imports
+### Duplicates/LODs
+For stuff like multiple duplicate models, shadow cast models and LODs, you can simply delete them from the viewport.
+
+![](https://user-images.githubusercontent.com/74399067/206869011-d9ae2e5b-fb07-4de0-8c86-981b216687c2.gif)
+
+### UV Flipping
+To use the unpacked textures, you will need to flip the UVs of your model. For this, select all your models and press TAB to go into edit mode. Now navigate to the UV editing tab, and on the UV Panel click on "UV" and mirror on the Y axis.
+
+
+![](https://user-images.githubusercontent.com/74399067/206869188-59ec0083-79fa-40c5-b28f-f34d23b1d3ed.gif)
+
+### Weighted Normals
+As the current tools for Infinite cannot extract normal data, we need to use the Weighted Normals modifier to have Blender "guess" the vertex normal data required to have proper shading on our imported models.
+
+For this, you first need to merge by distance on your models, which is possible by going into editing mode with TAB, pressing F3 and searching for "Merge By Distance". After this, go out of edit mode and right click and press "Shade Auto Smooth". And lastly, add the "Weighted Normals" modifier to every model you have with "Face Area and Angle" as the Weighting Mode.
+
+![](https://user-images.githubusercontent.com/74399067/206869497-de1a545a-13cf-4001-9951-7884ef4d5ec2.gif)
+![](https://user-images.githubusercontent.com/74399067/206869502-adc95987-9516-41fc-add6-bc48c87448cf.gif)
+
+## Extracting Coatings
