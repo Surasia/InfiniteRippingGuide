@@ -1,8 +1,9 @@
-# Exporting Models from Halo Infinite
+# Halo Infinite Model Ripping Guide
 
 ## Required Software
 - [Blender](https://www.blender.org/download/)
     - [blender-halo-infinite](https://github.com/Coreforge/blender-halo-infinite) 
+    - [Halo Infinite Modular Shader](https://cdn.discordapp.com/attachments/1035019724444160081/1035019728445505656/HIMS_2.7.blend)
 - [HaloInfiniteModuleUnpacker](https://github.com/Surasia/HaloInfiniteModuleUnpacker)
 - [HaloInfiniteModelExtractor](https://github.com/MontagueM/HaloInfiniteModelExtractor)
 - [XNConvert](https://www.xnview.com/en/xnconvert/)
@@ -39,13 +40,23 @@ After you've entered the directories, you can now run the script. In IDLE, you c
 ![image](https://user-images.githubusercontent.com/74399067/206863140-564ac3ba-d506-45f0-81ca-30e15ba45eb9.png)
 
 ## Converting DDS to PNG
-
 While DDS files are good for compression in games, the limited support of it outside of engines can cause issues, especially with Blender. For this, we can convert our files to PNG or TGA using XNConvert, which can batch thousands of files quickly. 
 
 To convert your textures, simply open XNConvert and drag a folder from your unpack directory into it, go to output, select "Delete Original", enable "Use Multiple CPU Cores" with the maximum amount of threads, and set "Format" as PNG.
 
 In this example, I used "elite" from the "\__chore\pc__\objects\characters" folder and dragged it into XnConvert.
-![3ad711da59519b1eb83ef6988d0bba40](https://user-images.githubusercontent.com/74399067/206863613-c79ebffc-fc6e-4fa2-8c43-a3c830a145db.gif)
+![](https://user-images.githubusercontent.com/74399067/206863613-c79ebffc-fc6e-4fa2-8c43-a3c830a145db.gif)
 
 ## Importing Models 
+For this step, you will need Blender and the blender-halo-infinite addon by Coreforge. To install the addon, go to Edit, Preferences, Add-ons and then select the zip you downloaded. You do not need to unzip the file for this step.
 
+![](https://user-images.githubusercontent.com/74399067/206867790-e1e0439e-1f34-4a0b-9cf9-bada0ff8be2c.gif)
+
+Now, in blender, go to File, import and select "Halo Infinite rendermodel". Now, using the explorer in blender, navigate to your unpack folder. Models are most commonly found in the "\_chore\gen__\" directory. Here, go into the folder which has the model that you want to import. 
+
+For this example, I used the Grapple Shot model which can be found at the "\_chore\gen__\objects\equipment\unsc\ability_grapple_hook\" directory of your unpacked folder. Once you have navigated here, select the file with the ".render_model" extension and press import. Make sure to disable "import vertex weights" and "(potentially broken) Import Normals"
+
+You will now see that the model you chose has been imported.
+![](https://user-images.githubusercontent.com/74399067/206868308-dd53579d-7989-415f-b820-4f10c54d3fdc.gif)
+
+## Fixing Up Imports
