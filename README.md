@@ -277,7 +277,29 @@ If your model does in fact use Dust, make sure to enable it on the top of the bl
 ![](https://user-images.githubusercontent.com/74399067/206912842-9d3c2926-a85c-457e-be68-bee4a1458a24.png)
 ![](https://user-images.githubusercontent.com/74399067/206913166-b113f49e-4fdc-4338-b6dd-1c8e48be981d.png)
 
-### Part 7:
+### Part 7: Entering Scaling Values
+
+Scaling in Infinite is done using 8 parameters, which can be found in the material and swatch tags in Infinite. For this step, we will need to open IRTV and again navigate to our .material tag. Here, open the "material parameters" tab and switch over to the second (1) entry.
+
+![](https://user-images.githubusercontent.com/74399067/206913682-32da2e28-3a39-4f6f-8010-3be6e788a4ed.gif)
+
+There are 4 values here which you need;
+- ```Real``` for "Base Scale X" in Blender
+- ```Vector X``` for "Base Scale Y" in Blender
+- ```Vector Y``` for "Material Transform X" in Blender
+- ```Vector Z``` for "Material Transform Y" in Blender
+
+For the remaining values, we'll need to open the ```.materialswatch``` tags in IRTV. Search for the swatch used in a zone, such "hum_plastic_painted" and open up the tag.
+
+![](https://user-images.githubusercontent.com/74399067/206914056-f0c3698e-ec5d-4584-8356-7d9727b64de7.png)
+
+
+There are 4 values here which you need;
+- ```ColorAndRoughnessTextureTransform X``` for "Gradient Scale X"
+- ```ColorAndRoughnessTextureTransform Y``` for "Gradient Scale Y"
+- ```NormalTextureTransform X``` for "Gradient Scale X"
+- ```NormalTextureTransform Y``` for "Gradient Scale Y"
+
 
 
 
