@@ -207,4 +207,38 @@ You can import textures by simply dragging them from Windows Explorer into the B
 
 ![](https://user-images.githubusercontent.com/74399067/206908795-1b312912-5d4d-4f4b-989e-9cc5ad950b2c.gif)
 
+When you are done, your model should look fairly done, however there is still much to fix and improve.
 
+![](https://user-images.githubusercontent.com/74399067/206909112-e1c502c4-39e1-4621-99f9-3a991cc56d48.png)
+
+### Part 3: Swatch Fix-Up
+
+Infinite's modular shader system works with different swatches- which are materials with a "GradientMap" which includes a color gradient, and a tileable normal map. You will notice that they are plugged into the main shader.
+
+As the swatches imported with Coating Tool are outdated and have wrong roughness/scaling math inside them, we will need to replace them with the proper math. We can use the "Enamel Smooth" which we imported as a template, as it has the accurate math for the shader.
+
+First, we need to establish which swatch a zone uses. Select a swatch, and press TAB to go inside the nodegroup. There, you will see two textures, the one at the top being the GradientMask, and the bottom one being the Normal.
+
+As an example; 
+- ```hum_base_paint_gun_metal_painted_gradientmask{pc}.bitmap.png```
+- ```hum_base_paint_gun_metal_painted_normal{pc}.bitmap.png```
+
+are apart of the "gun_metal_painted" swatch. 
+
+![](https://user-images.githubusercontent.com/74399067/206910432-47809e67-b305-4256-a9ee-7c83710afb94.gif)
+
+Now onto actually fixing the swatches. Swap a swatch with Enamel Smooth, duplicate it (or rename it if it's the only instance), rename it with the swatch name from the bitmaps, then switch out the image textures with the ones from the swatch. You can reuse the same nodegroup if the zones have the same swatch.
+
+
+![](https://user-images.githubusercontent.com/74399067/206910800-830a99c4-dfb1-4d8b-9e3e-00da17a31f97.gif)
+
+![](https://user-images.githubusercontent.com/74399067/206910946-4132c8f6-21d0-4ff5-b39f-63fabab3909c.gif)
+
+**Tip: For easier viewing, you can compact a swatch by pressing "H" while selected.**
+
+![](https://user-images.githubusercontent.com/74399067/206911200-8115b71c-4687-4d31-8f50-a7030a23c95e.gif)
+
+### Fixing Zone 2
+Due to a bug with CoatingTool, the second zone has the wrong swatch set for it. You can check what swatch it uses with the JSON.
+
+Simply drag your coating JSON into Firefox,
