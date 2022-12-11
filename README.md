@@ -112,7 +112,7 @@ sys.path.append(lib_path)
 
 At the end, the top of your file should look like this. You can now run it.
 
-![](https://user-images.githubusercontent.com/74399067/206901077-0599fcf9-061d-4ace-8f92-d742757bf049.png)
+![](https://user-images.githubusercontent.com/74399067/206901578-19785ece-4fc9-416d-802a-e35230d4ed85.png)
 
 ### Troubleshooting with Coating Export
 
@@ -125,3 +125,35 @@ For this error, you will need to install different pip modules using command pro
 After this, open command prompt and type ```pip install [MODULENAME]```. For example, with the "sympy" module, we need to type ```pip install sympy``` and press enter. The only exception to this is with PIL in our file, where you have to type ```pip install pillow```.
 
 ## Converting JSONs to Python Files
+
+To use the exported JSON, we need to convert them to usable python files for Blender. For this, we can use InfiniteCoatingTool by BIOS (Or specifically, my version of it). Download it and extract it to a directory of your choice. Once you have, go into ```Resources\cache.ini``` and open it in notepad. Here, you will see two variables to edit.
+
+> For ```detailMaps```, use the ```__chore\pc__``` in your unpack path. This is where all your textures are kept.
+
+> For ```output```, you can select any folder of your choosing, however I prefer having it inside the CoatingTool directory.
+
+Now, for the final conversion, go back into the root directory of CoatingTool, and open a command prompt in that directory. You can do this by typing "cmd" into the path tab.
+
+![](https://user-images.githubusercontent.com/74399067/206902029-a17c2eab-6949-431b-bc97-4e16d4cbbec9.gif)
+
+In command prompt, now type in ```infinite-coating-tool.exe -i [PATH TO JSON] -n [COATINGNAME]```, and press enter. It will now process your coating into python files.
+
+In my case, this is ```infinite-coating-tool.exe -i G:\CoatingExports\coating\olympus_spartan_grapple_hook_default.json -n olympus_spartan_grapple```
+
+![](https://user-images.githubusercontent.com/74399067/206902311-ab4a8a87-9a34-4319-a859-28b3d0b13f9c.gif)
+
+### Troubleshooting CoatingTool
+
+#### "Infinite_Coating_Tool.UnknownMaterialException"
+To fix this error, you will need to replace the Unknown Material in the JSON such as ```cvw_1_layered_alpha``` with ```cvw_7_layered``` in Notepad or any other text editor with the "Replace" or "Find And Replace" function.
+
+#### "System.ArgumentException: An item with the same key has already been added."
+For this error, search for the key from the error such as ```8EB26F13```in Notepad, then delete the first occurence of it.
+
+## Finding Regions For Materials
+
+Every material in Infinite has special parameters to show where certain coating regions should go to. To find these, we need to open the game itself and Infinite Runtime Tag Viewer, which is a mod tool for Infinite.
+
+**This will not get you banned from Online play, and does not affect others in Online matches.**
+
+When you have Infinite open, launch a map where you know the asset exists in. In my case, for the grapple hook, it can be found directly in the main menu.
