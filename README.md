@@ -72,7 +72,7 @@ To use the unpacked textures, you will need to flip the UVs of your model. For t
 
 ![](https://user-images.githubusercontent.com/74399067/206869188-59ec0083-79fa-40c5-b28f-f34d23b1d3ed.gif)
 
-### Weighted Normals
+### "Fixing" Normals 
 As the current tools for Infinite cannot extract normal data, we need to use the Weighted Normals modifier to have Blender "guess" the vertex normal data required to have proper shading on our imported models.
 
 For this, you first need to merge by distance on your models, which is possible by going into editing mode with TAB, pressing F3 and searching for "Merge By Distance". After this, go out of edit mode and right click and press "Shade Auto Smooth". And lastly, add the "Weighted Normals" modifier to every model you have with "Face Area and Angle" as the Weighting Mode.
@@ -316,6 +316,24 @@ There are 4 values here which you need;
 ## Congrats! Your model is now properly imported.
 
 ![](https://cdn.discordapp.com/attachments/1047606773290373120/1047606774502531202/GrappleShot.png)
+
+## Common Issues and Solutions
+
+### When I try to import from the python file, it gives me a "File Not Found" error. What can I do?
+
+Some textures in Infinite are packed into a single .bitmap file, which HaloInfiniteModelExtractor cannot extract. For these textures specifically, you can use [Mohawk](https://github.com/Twigzie/Fantality-Infinite-Mohawk) which can extract them. Don't forget to rename them and put them into their proper directories once they are extracted.
+
+### My Normal Maps are corrupted- how can I fix this?
+
+HIME doesn't support some DirectX Normal types, which can cause corrupted normal maps to appear. To properly extract these textures, you need [RawTex](https://forum.xentax.com/viewtopic.php?f=18&t=16461)/ [Rawtex Mirror](https://cdn.discordapp.com/attachments/1004426111633080380/1020822059477127258/Rawtex.rar). 
+
+Simply drag the biggest .bitmap tag file (such as ```.bitmap[3_bitmap_resource_handle.chunk3]```) into Rawtex, change the scaling according to the file and select BC5S as the texture format. For the 0xOFFSET, start with "337" and slowly iterate until you get a proper normal map.
+
+Scaling values for bitmaps are:
+- ```.bitmap[3_bitmap_resource_handle.chunk3]``` -> 2048x2048
+- ```.bitmap[2_bitmap_resource_handle.chunk2]``` -> 1024x1024
+- ```.bitmap[1_bitmap_resource_handle.chunk1]``` -> 512x512
+- ```.bitmap[0_bitmap_resource_handle.chunk0]``` -> 256x256
 
 
 
