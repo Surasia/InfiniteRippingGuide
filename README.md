@@ -264,7 +264,21 @@ Any other values such as "ScratchColor" are currently not necessary.
 
 ![](https://user-images.githubusercontent.com/74399067/206912513-3b355778-4873-4267-ba4b-e60460e1e984.png)
 
-### Part 6: Finding Scaling Values
+### Part 6: Fixing the DustSwatch
+
+Some models use an additional zone called "Dust" inside mask1 to add detail to models, such as Chief's campaign model. These are found in the last entry in a regionlayer, and are usually empty with the default swatch being present: ```00000000```.
+
+Using the same steps as Part 5, you can enter the values for Dust just like Grime. However, even if your model has a swatch listed in its last layer, it still depends on the material used (see below). 
+
+**If the "material" inside your RegionLayer has "damage" inside it, such as "cvw_7_layered_damage", it means that it does. If it doesn't, you do not need to bother with this step.**
+
+If your model does in fact use Dust, make sure to enable it on the top of the blender shader by setting "Dust Amount" to 1.
+
+![](https://user-images.githubusercontent.com/74399067/206912842-9d3c2926-a85c-457e-be68-bee4a1458a24.png)
+![](https://user-images.githubusercontent.com/74399067/206913166-b113f49e-4fdc-4338-b6dd-1c8e48be981d.png)
+
+### Part 7:
+
 
 
 
