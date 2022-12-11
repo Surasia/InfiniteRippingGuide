@@ -322,12 +322,13 @@ There are 4 values here which you need;
 ### Is it possible to import a rig and weights attached to a model?
 Currently, there is no rig/weight support for imports done with the Blender addon. There is work being done however, with Urium's tool managing to extract rigs with partial weights, but it is far from done as of now.
 
+
 ### When I try to import from the python file, it gives me a "File Not Found" error. What can I do?
 
 Some textures in Infinite are packed into a single .bitmap file, which HaloInfiniteModelExtractor cannot extract. For these textures specifically, you can use [Mohawk](https://github.com/Twigzie/Fantality-Infinite-Mohawk) which can extract them. Don't forget to rename them and put them into their proper directories once they are extracted.
 
-### Some of my mormal Maps are corrupted- how can I fix this?
 
+### Some of my mormal Maps are corrupted- how can I fix this?
 As HIME doesn't support some DirectX Normal types, it can cause corrupted normal maps to appear. To properly extract these textures, you need [RawTex](https://forum.xentax.com/viewtopic.php?f=18&t=16461) [[Mirror]](https://cdn.discordapp.com/attachments/1004426111633080380/1020822059477127258/Rawtex.rar). 
 
 Simply drag the biggest .bitmap tag file (such as ```.bitmap[3_bitmap_resource_handle.chunk3]```) into Rawtex, change the scaling according to the file and select BC5S as the texture format. For the 0xOFFSET, start with "337" and slowly iterate until you get a proper normal map.
@@ -346,8 +347,24 @@ The same setup needs to be done as the regular one, with a single additional edi
 ![](https://user-images.githubusercontent.com/74399067/206918918-4e3a6531-86ea-455d-ab98-5d08517b2ea9.png)
 
 
+### I don't want to/can't add Python to PATH. How can I use pip?
+Navigate to your python install folder. This is normally found in ```C:\Users\USER\AppData\Local\Programs\Python\Python37"```. Go inside the scripts folder here, and open a command prompt by typing "cmd" into the path menu. You can now enter the pip commands here.
+
+
 ## Still have issues/questions? Feel free to submit them on the "Issues" page of this repository.
 
+# Credits
+## My sincere thanks to:
+- Coreforge for his amazing Blender addon and support of the Halo ripping community. His tools have helped a ton in creating this guide.
+- Average Goblin/Goat/Trap Enthusiast for his work on Halo Infinite Modular Shader and research of the Halo Infinite shader system. And also being the biggest Mark IV enthusiast alive. 
+- Montague Moran for creating HIMU/HIME, which have been essential in the development of other tools.
+- Gamergotten/Krevil/Z-15 for their contributions to the Halo Infinite modding community. IRTV has given really insightful info such as the scaling values in this guide, and is an invaluable tool for anyone interested in modding Infinite.
+- BIOS for creating Infinite Coating Tool. It has saved me at least a couple hundred hours of work, with more to come :D
+- TheJudSub for creating the template python script and iterating over the shader, creating the foundation for the porting process.
+- Plastered_Crab for creating the Halo Archive and C.R.A.B. (Central Research Archive Bureau) where almost all of the research into Infinite has taken place, contributing to the python script and supporting the community for years <3
+- Urium86 for creating HaloInfiniteResearch and allowing for much more data from tags to be extracted. He has been working really hard for the last few months on this project even while being on a limited time schedule. 
+    - You can support him at: http://shorturl.at/ab037 and https://www.patreon.com/fromb1t0life.
+- Deskclaw for teaching me how to use Rawtex.
 
 
 
