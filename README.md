@@ -335,7 +335,7 @@ Scaling values for bitmaps are:
 - ```.bitmap[1_bitmap_resource_handle.chunk1]``` -> 512x512
 - ```.bitmap[0_bitmap_resource_handle.chunk0]``` -> 256x256
 
-
+## Still have issues/questions? Feel free to submit them on the "Issues" page of this repository.
 
 
 
