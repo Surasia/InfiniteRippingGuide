@@ -98,7 +98,7 @@ To extract coatings, we need HaloInfiniteResearch by Urium86. Download and unzip
 
 Coatings in Infinite come in tags called "materialpallete" and are categorized per model as "materialstyles". They include information about swatches, which are tileable textures and other variables that make up a zone.
 
-For this step, we need to navigate back to the main directory of HaloInfiniteResearch, and open ```exports\\run_coating_export.py``` in a text editor of your choice. In this file, you will need to edit a few things.
+For this step, we need to navigate back to the main directory of HaloInfiniteResearch, and open ```exporters\\run_coating_export.py``` in a text editor of your choice. In this file, you will need to edit a few things.
 
 > Delete ```spartan_style``` from the ```'*spartan_style{ct}.materialstyles'``` definition.
 
@@ -319,13 +319,16 @@ There are 4 values here which you need;
 
 ## Common Issues and Solutions
 
+### Is it possible to import a rig and weights attached to a model?
+Currently, there is no rig/weight support for imports done with the Blender addon. There is work being done however, with Urium's tool managing to extract rigs with partial weights, but it is far from done as of now.
+
 ### When I try to import from the python file, it gives me a "File Not Found" error. What can I do?
 
 Some textures in Infinite are packed into a single .bitmap file, which HaloInfiniteModelExtractor cannot extract. For these textures specifically, you can use [Mohawk](https://github.com/Twigzie/Fantality-Infinite-Mohawk) which can extract them. Don't forget to rename them and put them into their proper directories once they are extracted.
 
-### My Normal Maps are corrupted- how can I fix this?
+### Some of my mormal Maps are corrupted- how can I fix this?
 
-HIME doesn't support some DirectX Normal types, which can cause corrupted normal maps to appear. To properly extract these textures, you need [RawTex](https://forum.xentax.com/viewtopic.php?f=18&t=16461)/ [Rawtex Mirror](https://cdn.discordapp.com/attachments/1004426111633080380/1020822059477127258/Rawtex.rar). 
+As HIME doesn't support some DirectX Normal types, it can cause corrupted normal maps to appear. To properly extract these textures, you need [RawTex](https://forum.xentax.com/viewtopic.php?f=18&t=16461) [[Mirror]](https://cdn.discordapp.com/attachments/1004426111633080380/1020822059477127258/Rawtex.rar). 
 
 Simply drag the biggest .bitmap tag file (such as ```.bitmap[3_bitmap_resource_handle.chunk3]```) into Rawtex, change the scaling according to the file and select BC5S as the texture format. For the 0xOFFSET, start with "337" and slowly iterate until you get a proper normal map.
 
@@ -334,6 +337,14 @@ Scaling values for bitmaps are:
 - ```.bitmap[2_bitmap_resource_handle.chunk2]``` -> 1024x1024
 - ```.bitmap[1_bitmap_resource_handle.chunk1]``` -> 512x512
 - ```.bitmap[0_bitmap_resource_handle.chunk0]``` -> 256x256
+
+### I'm getting a "struct.error: unpack requires a buffer of 4 bytes" error. How can I fix this?
+This means that the .materialstyle you are trying to extract is from campaign, and requires [a different version of HaloInfiniteResearch](https://github.com/urium1186/HaloInfiniteResearch/tree/f65119545ed75d2c4338e8dcd99231b8f671eb40). 
+
+The same setup needs to be done as the regular one, with a single additional edit made to the ```\tag_reader\readers\materialpalette.py``` file. Open the file in a text editor, and comment the 36th line. The image below should be how it looks like at the end. You can now save and run the coating export again.
+
+![](https://user-images.githubusercontent.com/74399067/206918918-4e3a6531-86ea-455d-ab98-5d08517b2ea9.png)
+
 
 ## Still have issues/questions? Feel free to submit them on the "Issues" page of this repository.
 
