@@ -156,4 +156,55 @@ Every material in Infinite has special parameters to show where certain coating 
 
 **This will not get you banned from Online play, and does not affect others in Online matches.**
 
-When you have Infinite open, launch a map where you know the asset exists in. In my case, for the grapple hook, it can be found directly in the main menu.
+When you have Infinite open, launch a map where you know the asset exists in. In my case, for the grapple hook, it can be found directly in the main menu. In IRTV, press "Load" and wait until all tags are loaded. You can now search for the material for your model.
+
+For the grapple hook, the only material present is ```olympus_spartan_grapple_hook_default```, so I have searched for it in IRTV. You can see the materials in a part of your model in Blender using the Material Properties menu.
+
+![](https://user-images.githubusercontent.com/74399067/206903692-05adfe15-42af-45b5-99e4-b31f213c2c5d.png)
+
+In IRTV, after you've found opened the tag, scroll down and open the "style info" menu and look for the "region name". This is a hash which will tell us what script to use when importing our models. 
+
+**Do note that at some times this step is not necessary and the python files will have human-readable names such as "default", however it is good to ensure that you are using the proper files.**
+
+![](https://user-images.githubusercontent.com/74399067/206903813-293ff041-d32e-4757-a2c7-511283930f62.png)
+
+## Importing Coatings into Blender
+
+### Part 1: Running the Python Script
+Back in Blender, open the "Scripting" tab and open the python file with the "region name" which you found in the last step. You should now see a big python file inside the tab.
+
+Inside the file, you'll have to edit ```ArmorRegion``` to be ```torso```. You can leave ArmorRegionName as is.
+
+![](https://user-images.githubusercontent.com/74399067/206907482-dc02b18a-5c26-4480-bbd0-cbd8fd85e3db.png)
+
+You can now run the file. If you get any "Index Out Of Range" or "Expected Tuple instead of Float" errors, just press the run button again.
+
+![](https://user-images.githubusercontent.com/74399067/206907591-c3266ab3-187e-451a-b4b4-09d5d729a18e.gif)
+
+### Part 2: Basic Shader Setup
+
+If the script has run, you can move onto the "Shading" tab. You will see that your object is black and has a new material assigned. Copy all the nodes, switch to the old material, delete the nodes there, and paste the nodes you copied.
+
+![](https://user-images.githubusercontent.com/74399067/206907804-88852e80-a700-44ec-809a-f22ea9fea1eb.gif)
+
+After you're done with this, you will have to switch to the new shader. Download Halo Infinite Modular Shader from the "Required Software" section, and Append the nodegroups of the main shader and "Enamel_Smooth".
+
+![](https://user-images.githubusercontent.com/74399067/206908108-99d89ae7-b4e3-4b85-805c-c4882e7f3136.gif)
+
+Now, you'll have to replace the 2.2 shader with the 2.7 one, which is as easy as clicking the icon next to the shader and selecting "Halo Infinite Shader 2.7". I also recommend pulling the shader up a bit to match up with how it was, which you can do by selecting the shader, pressing G and Y, then typing 134.
+
+![](https://user-images.githubusercontent.com/74399067/206908365-2a7b6798-9e12-4aba-ab55-868596c67ce3.gif)
+
+Finally, you will need to add the actual mask textures themselves. Textures are found in the ```\__chore\pc__\``` directory, at the same subdirectory as your models.
+
+As an example for the grapple hook: 
+- The model is found at ```__chore\gen__\objects\equipment\unsc\ability_grapple_hook\```
+- The textures are found at ```__chore\pc__\objects\equipment\unsc\ability_grapple_hook\```
+
+You can import textures by simply dragging them from Windows Explorer into the Blender nodegraph, and then selecting them from Image Texture nodes. Make sure to insert the proper textures into their spots, such as ASG, Mask0, Mask1 and Normal. If a model is missing the Mask1 texture, use Mask0 instead of it and leave the main ```Mask_0 Texture``` image texture node empty.
+
+**Important: Do not forget to set textures as "Non-Color" inside Blender.**
+
+![](https://user-images.githubusercontent.com/74399067/206908795-1b312912-5d4d-4f4b-989e-9cc5ad950b2c.gif)
+
+
