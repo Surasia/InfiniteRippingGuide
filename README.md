@@ -300,6 +300,13 @@ There are 4 values here which you need;
 - ```NormalTextureTransform X``` for "Gradient Scale X"
 - ```NormalTextureTransform Y``` for "Gradient Scale Y"
 
+![](https://user-images.githubusercontent.com/74399067/206914769-673bafbb-d65b-4835-9fb3-234a730cd6a6.png)
+
+## Congrats! Your model is now properly imported.
+
+![](https://cdn.discordapp.com/attachments/1047606773290373120/1047606774502531202/GrappleShot.png)
+
+
 
 
 
