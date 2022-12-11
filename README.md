@@ -308,8 +308,8 @@ For the remaining values, we'll need to open the ```.materialswatch``` tags in I
 There are 4 values here which you need;
 - ```ColorAndRoughnessTextureTransform X``` for "Gradient Scale X"
 - ```ColorAndRoughnessTextureTransform Y``` for "Gradient Scale Y"
-- ```NormalTextureTransform X``` for "Gradient Scale X"
-- ```NormalTextureTransform Y``` for "Gradient Scale Y"
+- ```NormalTextureTransform X``` for "Normal Scale X"
+- ```NormalTextureTransform Y``` for "Normal Scale Y"
 
 ![](https://user-images.githubusercontent.com/74399067/206914769-673bafbb-d65b-4835-9fb3-234a730cd6a6.png)
 
@@ -328,7 +328,7 @@ Currently, there is no rig/weight support for imports done with the Blender addo
 Some textures in Infinite are packed into a single .bitmap file, which HaloInfiniteModelExtractor cannot extract. For these textures specifically, you can use [Mohawk](https://github.com/Twigzie/Fantality-Infinite-Mohawk) which can extract them. Don't forget to rename them and put them into their proper directories once they are extracted.
 
 
-### Some of my mormal Maps are corrupted- how can I fix this?
+### Some of my Normal Maps are corrupted- how can I fix this?
 As HIME doesn't support some DirectX Normal types, it can cause corrupted normal maps to appear. To properly extract these textures, you need [RawTex](https://forum.xentax.com/viewtopic.php?f=18&t=16461) [[Mirror]](https://cdn.discordapp.com/attachments/1004426111633080380/1020822059477127258/Rawtex.rar). 
 
 Simply drag the biggest .bitmap tag file (such as ```.bitmap[3_bitmap_resource_handle.chunk3]```) into Rawtex, change the scaling according to the file and select BC5S as the texture format. For the 0xOFFSET, start with "337" and slowly iterate until you get a proper normal map.
