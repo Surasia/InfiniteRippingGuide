@@ -151,6 +151,17 @@ To fix this error, you will need to replace the Unknown Material in the JSON suc
 #### "System.ArgumentException: An item with the same key has already been added."
 For this error, search for the key from the error such as ```8EB26F13```in Notepad, then delete the first occurence of it.
 
+#### "System.ArgumentException: Index Out Of Range."
+
+*Note: This error requires a bit of JSON experience to fix, but I've tried to simplify the overall process.*
+
+This happens when a region has no layers associated with it. To fix this, open the JSON by dragging it into Firefox. Go to the "Raw Data" section and press pretty print. Press Ctrl + A and copy everything which you have selected into notepad. 
+
+Now, navigate to the bottom parts of the file, and search for a "region" with no "layers". Once you have found it, delete starting from after  ```},``` to the other ```},```. 
+
+![](https://user-images.githubusercontent.com/74399067/206915455-a206b678-4f65-4a64-bc74-950d5f8c1d56.png)
+
+
 ## Finding Regions For Materials
 
 Every material in Infinite has special parameters to show where certain coating regions should go to. To find these, we need to open the game itself and Infinite Runtime Tag Viewer, which is a mod tool for Infinite.
@@ -305,6 +316,7 @@ There are 4 values here which you need;
 ## Congrats! Your model is now properly imported.
 
 ![](https://cdn.discordapp.com/attachments/1047606773290373120/1047606774502531202/GrappleShot.png)
+
 
 
 
