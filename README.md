@@ -6,6 +6,7 @@
     - [Halo Infinite Modular Shader](https://cdn.discordapp.com/attachments/1035019724444160081/1035019728445505656/HIMS_2.7.blend)
 - [HaloInfiniteModuleUnpacker](https://github.com/Surasia/HaloInfiniteModuleUnpacker)
 - [HaloInfiniteModelExtractor](https://github.com/MontagueM/HaloInfiniteModelExtractor)
+- [Firefox](https://www.mozilla.org/en-US/firefox/new/)
 - [XNConvert](https://www.xnview.com/en/xnconvert/)
 - [InfiniteRuntimeTagviewer](https://github.com/Gamergotten/Infinite-runtime-tagviewer)
 - [InfiniteCoatingTool](https://github.com/Surasia/Infinite-Coating-Tool/releases/tag/release)
@@ -241,4 +242,25 @@ Now onto actually fixing the swatches. Swap a swatch with Enamel Smooth, duplica
 ### Fixing Zone 2
 Due to a bug with CoatingTool, the second zone has the wrong swatch set for it. You can check what swatch it uses with the JSON.
 
-Simply drag your coating JSON into Firefox,
+Simply drag your coating JSON into Firefox, and you will see it open in a JSON viewer. Expand ```regionLayers``` and look for the ```region name``` from IRTV. Expand it and go into layers. Finally, expand "1" which is the second zone. You will see the ```swatchID ``` for the zone, which you can look up in the next section.
+
+![](https://user-images.githubusercontent.com/74399067/206911822-88e19dda-0a27-4134-b856-0547cb8cdd7a.png)
+
+Now, to find the swatch used, go to the "swatches" section above and look for the swatch which uses the ```swatchID ``` from the previous step. In my case, the swatch ID is ```E8B4E5A9``` which is the "gun_metal_painted" swatch. You can now change it in Blender as well.
+
+![](https://user-images.githubusercontent.com/74399067/206912013-70539436-def9-49a1-9ce1-75cd5b2ad67a.png)
+
+### Fixing the GrimeSwatch
+
+For this step, we will also need to open the JSON file in Firefox. At the very top of the file you will spot ```GrimeSwatch``` with a SwatchID next to it. Like with the Zone2 fix, open up the swatches section and look for the swatch used.
+
+![](https://user-images.githubusercontent.com/74399067/206912242-f084c8e5-5f21-461d-9932-585ba04259c3.png)
+
+In my instance, it is using the "Base Dust 01" swatch, with the listed values. Back in Blender, make sure to enter the proper values into boxes such as 
+- "Roughness/Roughness Black/Roughness White" which can be entered into the shader
+- "TopColor/MidColor/BotColor" which are R/G/B values (in order) which can be entered into the shader by clicking onto the color boxes.
+
+Any other values such as "ScratchColor" are currently not necessary.
+
+![](https://user-images.githubusercontent.com/74399067/206912513-3b355778-4873-4267-ba4b-e60460e1e984.png)
+
