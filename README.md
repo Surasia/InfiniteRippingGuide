@@ -23,7 +23,7 @@ To actually extract models or any data from the game, we need to uncompress it. 
 
 **Important: Make sure you have use forward slashes (/) and have no backwards slashes present (\\).**
 
-After you've entered the directories, you can now run the script. In IDLE, you can use the Run > Run Module option, or manually run it using cmd ```py unpacker.py```. You should now see the modules slowly listing their file amounts and extracting themselves to the given unpack path.
+After you've entered the directories, you can now run the script. In IDLE, you can use the Run > Run Module option, or manually run it using cmd ```py unpacker.py```. You should now see the modules slowly listing their file amounts and extracting themselves to the given unpack path. If you get a "module not found" error, [try this fix](https://github.com/Surasia/InfiniteRippingGuide#module-not-found)
 
 ![](https://user-images.githubusercontent.com/74399067/206862389-6b20ca1f-7579-41ad-a7ad-cd8753d5f356.png)
 
