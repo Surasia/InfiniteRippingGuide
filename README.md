@@ -3,13 +3,13 @@
 ## Required Software
 - [Blender](https://www.blender.org/download/)
     - [blender-halo-infinite](https://github.com/Coreforge/blender-halo-infinite) 
-    - [Halo Infinite Modular Shader](https://cdn.discordapp.com/attachments/1035019724444160081/1035019728445505656/HIMS_2.7.blend)
 - [HaloInfiniteModuleUnpacker](https://github.com/Surasia/HaloInfiniteModuleUnpacker)
 - [HaloInfiniteModelExtractor](https://github.com/MontagueM/HaloInfiniteModelExtractor)
 - [Firefox](https://www.mozilla.org/en-US/firefox/new/)
 - [XNConvert](https://www.xnview.com/en/xnconvert/)
-- [InfiniteRuntimeTagviewer](https://github.com/Gamergotten/Infinite-runtime-tagviewer)
-- [InfiniteCoatingTool](https://github.com/Surasia/Infinite-Coating-Tool/releases/tag/release)
+- [Halo-Infinite-Tag-Editor](https://github.com/Z-15/Halo-Infinite-Tag-Editor)
+    - [In-development build which you need for this tutorial](https://cdn.discordapp.com/attachments/1013790149940887552/1056666659693285417/net6.0-windows.rar)
+- [InfiniteCoatingTool](https://github.com/Surasia/Infinite-Coating-Tool/releases/tag/2.0)
 - [HaloInfiniteResearch](https://github.com/urium1186/HaloInfiniteResearch/tree/develop)
 - [Python](https://www.python.org/downloads/release/python-3111/)
 - [Halo Infinite](https://store.steampowered.com/app/1240440/Halo_Infinite)
@@ -127,7 +127,7 @@ After this, open command prompt and type ```pip install [MODULENAME]```. For exa
 
 ## Converting JSONs to Python Files
 
-To use the exported JSON, we need to convert them to usable python files for Blender. For this, we can use InfiniteCoatingTool by BIOS (Or specifically, my version of it). Download it and extract it to a directory of your choice. Once you have, go into ```Resources\cache.ini``` and open it in notepad. Here, you will see two variables to edit.
+To use the exported JSON, we need to convert them to usable python files for Blender. Download Infinite Coating Tool and extract it to a directory of your choice. Once you have, go into ```Resources\cache.ini``` and open it in notepad. Here, you will see two variables to edit.
 
 > For ```detailMaps```, use the ```__chore\pc__``` in your unpack path. This is where all your textures are kept.
 
@@ -139,14 +139,9 @@ Now, for the final conversion, go back into the root directory of CoatingTool, a
 
 In command prompt, now type in ```infinite-coating-tool.exe -i [PATH TO JSON] -n [COATINGNAME]```, and press enter. It will now process your coating into python files.
 
-In my case, this is ```infinite-coating-tool.exe -i G:\CoatingExports\coating\olympus_spartan_grapple_hook_default.json -n olympus_spartan_grapple```
-
-![](https://user-images.githubusercontent.com/74399067/206902311-ab4a8a87-9a34-4319-a859-28b3d0b13f9c.gif)
+In my case, this is ```infinite-coating-tool.exe -i G:\CoatingExports\coating\olympus_spartan_grapple_hook_default.json -n olympus_spartan_grapple```. Press Enter and wait until it finishes.
 
 ### Troubleshooting CoatingTool
-
-#### "Infinite_Coating_Tool.UnknownMaterialException"
-To fix this error, you will need to replace the Unknown Material in the JSON such as ```cvw_1_layered_alpha``` with ```cvw_7_layered``` in Notepad or any other text editor with the "Replace" or "Find And Replace" function.
 
 #### "System.ArgumentException: An item with the same key has already been added."
 For this error, search for the key from the error such as ```8EB26F13```in Notepad, then delete the first occurence of it.
@@ -162,50 +157,52 @@ Now, navigate to the bottom parts of the file, and search for a "region" with no
 ![](https://user-images.githubusercontent.com/74399067/206915455-a206b678-4f65-4a64-bc74-950d5f8c1d56.png)
 
 
-## Finding Regions For Materials
+## Extracting Data From Materials
 
-Every material in Infinite has special parameters to show where certain coating regions should go to. To find these, we need to open the game itself and Infinite Runtime Tag Viewer, which is a mod tool for Infinite.
+### Finding Regions
 
-**This will not get you banned from Online play, and does not affect others in Online matches.**
+Every material in Infinite has special parameters to show where certain coating regions should go to. To find these, we need to use Infinite Tag Editor, which is a mod tool for Halo Infinite. Open it, go to File > open and select a .module file from your Infinite "deploy" directory from the first step. The files we're looking for are usually found in the ``\deploy\any\globals\globals-rtx-new.module" file.
 
-When you have Infinite open, launch a map where you know the asset exists in. In my case, for the grapple hook, it can be found directly in the main menu. In IRTV, press "Load" and wait until all tags are loaded. You can now search for the material for your model.
+Once all the tags are open, you can search for the material for your model.
 
 For the grapple hook, the only material present is ```olympus_spartan_grapple_hook_default```, so I have searched for it in IRTV. You can see the materials in a part of your model in Blender using the Material Properties menu.
 
 ![](https://user-images.githubusercontent.com/74399067/206903692-05adfe15-42af-45b5-99e4-b31f213c2c5d.png)
 
-In IRTV, after you've found opened the tag, scroll down and open the "style info" menu and look for the "region name". This is a hash which will tell us what script to use when importing our models. 
+In HITE, after you've found opened the tag, scroll down and open the "style info" menu and look for the "region name". This is a hash which will tell us what script to use when importing our models. 
 
 **Do note that at some times this step is not necessary and the python files will have human-readable names such as "default", however it is good to ensure that you are using the proper files.**
 
-![](https://user-images.githubusercontent.com/74399067/206903813-293ff041-d32e-4757-a2c7-511283930f62.png)
+![](https://user-images.githubusercontent.com/74399067/209688252-e821bbb5-0471-454a-a2b8-0ac37176f366.png)
+
+### Finding Scaling Values
+
+Still in the .material tag, scroll up and open up the "material parameters" menu, with 1 (2nd submenu) opened. 
+
+There are 4 values here which you need, which will be used in the next step;
+- ```Real``` for "BaseScale_X" 
+- ```Vector X``` for "BaseScale_Y"
+- ```Vector Y``` for "MaterialTransform_X"
+- ```Vector Z```  for "MaterialTransform_Y"
+
+![](https://user-images.githubusercontent.com/74399067/209688580-2d8fa379-a147-4638-941d-2a2b6d78d3f4.png)
 
 ## Importing Coatings into Blender
 
-### Part 1: Running the Python Script
+### Running the Python Script
 Back in Blender, open the "Scripting" tab and open the python file with the "region name" which you found in the last step. You should now see a big python file inside the tab.
 
-Inside the file, you'll have to edit ```ArmorRegion``` to be ```torso```. You can leave ArmorRegionName as is.
+Inside the file, you will have to edit the values in from the last step (Finding Scaling Values)
 
-![](https://user-images.githubusercontent.com/74399067/206907482-dc02b18a-5c26-4480-bbd0-cbd8fd85e3db.png)
+![](https://user-images.githubusercontent.com/74399067/209689397-97f39c62-d077-44df-9b1e-afc29b5c0fa4.png)
 
-You can now run the file. If you get any "Index Out Of Range" or "Expected Tuple instead of Float" errors, just press the run button again.
 
-![](https://user-images.githubusercontent.com/74399067/206907591-c3266ab3-187e-451a-b4b4-09d5d729a18e.gif)
-
-### Part 2: Basic Shader Setup
+### Basic Shader Setup
 
 If the script has run, you can move onto the "Shading" tab. You will see that your object is black and has a new material assigned. Copy all the nodes, switch to the old material, delete the nodes there, and paste the nodes you copied.
 
-![](https://user-images.githubusercontent.com/74399067/206907804-88852e80-a700-44ec-809a-f22ea9fea1eb.gif)
+![](https://user-images.githubusercontent.com/74399067/209689658-c649f06a-7805-4df2-905a-ce5a6f14e134.gif)
 
-After you're done with this, you will have to switch to the new shader. Download Halo Infinite Modular Shader from the "Required Software" section, and Append the nodegroups of the main shader and "Enamel_Smooth".
-
-![](https://user-images.githubusercontent.com/74399067/206908108-99d89ae7-b4e3-4b85-805c-c4882e7f3136.gif)
-
-Now, you'll have to replace the 2.2 shader with the 2.7 one, which is as easy as clicking the icon next to the shader and selecting "Halo Infinite Shader 2.7". I also recommend pulling the shader up a bit to match up with how it was, which you can do by selecting the shader, pressing G and Y, then typing 134.
-
-![](https://user-images.githubusercontent.com/74399067/206908365-2a7b6798-9e12-4aba-ab55-868596c67ce3.gif)
 
 Finally, you will need to add the actual mask textures themselves. Textures are found in the ```\__chore\pc__\``` directory, at the same subdirectory as your models.
 
@@ -217,101 +214,8 @@ You can import textures by simply dragging them from Windows Explorer into the B
 
 **Important: Do not forget to set textures as "Non-Color" inside Blender.**
 
-![](https://user-images.githubusercontent.com/74399067/206908795-1b312912-5d4d-4f4b-989e-9cc5ad950b2c.gif)
+![](https://user-images.githubusercontent.com/74399067/209690436-95d54701-18b2-4f19-9b3b-3581c0ba60c6.gif)
 
-When you are done, your model should look fairly done, however there is still much to fix and improve.
-
-![](https://user-images.githubusercontent.com/74399067/206909112-e1c502c4-39e1-4621-99f9-3a991cc56d48.png)
-
-### Part 3: Swatch Fix-Up
-
-Infinite's modular shader system works with different swatches- which are materials with a "GradientMap" which includes a color gradient, and a tileable normal map. You will notice that they are plugged into the main shader.
-
-As the swatches imported with Coating Tool are outdated and have wrong roughness/scaling math inside them, we will need to replace them with the proper math. We can use the "Enamel Smooth" which we imported as a template, as it has the accurate math for the shader.
-
-First, we need to establish which swatch a zone uses. Select a swatch, and press TAB to go inside the nodegroup. There, you will see two textures, the one at the top being the GradientMask, and the bottom one being the Normal.
-
-As an example; 
-- ```hum_base_paint_gun_metal_painted_gradientmask{pc}.bitmap.png```
-- ```hum_base_paint_gun_metal_painted_normal{pc}.bitmap.png```
-
-are apart of the "gun_metal_painted" swatch. 
-
-![](https://user-images.githubusercontent.com/74399067/206910432-47809e67-b305-4256-a9ee-7c83710afb94.gif)
-
-Now onto actually fixing the swatches. Swap a swatch with Enamel Smooth, duplicate it (or rename it if it's the only instance), rename it with the swatch name from the bitmaps, then switch out the image textures with the ones from the swatch. You can reuse the same nodegroup if the zones have the same swatch.
-
-
-![](https://user-images.githubusercontent.com/74399067/206910800-830a99c4-dfb1-4d8b-9e3e-00da17a31f97.gif)
-
-![](https://user-images.githubusercontent.com/74399067/206910946-4132c8f6-21d0-4ff5-b39f-63fabab3909c.gif)
-
-**Tip: For easier viewing, you can compact a swatch by pressing "H" while selected.**
-
-![](https://user-images.githubusercontent.com/74399067/206911200-8115b71c-4687-4d31-8f50-a7030a23c95e.gif)
-
-### Part 4: Fixing Zone 2
-Due to a bug with CoatingTool, the second zone has the wrong swatch set for it. You can check what swatch it uses with the JSON.
-
-Simply drag your coating JSON into Firefox, and you will see it open in a JSON viewer. Expand ```regionLayers``` and look for the ```region name``` from IRTV. Expand it and go into layers. Finally, expand "1" which is the second zone. You will see the ```swatchID ``` for the zone, which you can look up in the next section.
-
-![](https://user-images.githubusercontent.com/74399067/206911822-88e19dda-0a27-4134-b856-0547cb8cdd7a.png)
-
-Now, to find the swatch used, go to the "swatches" section above and look for the swatch which uses the ```swatchID ``` from the previous step. In my case, the swatch ID is ```E8B4E5A9``` which is the "gun_metal_painted" swatch. You can now change it in Blender as well.
-
-![](https://user-images.githubusercontent.com/74399067/206912013-70539436-def9-49a1-9ce1-75cd5b2ad67a.png)
-
-### Part 5: Fixing the GrimeSwatch
-
-For this step, we will also need to open the JSON file in Firefox. At the very top of the file you will spot ```GrimeSwatch``` with a SwatchID next to it. Like with the Zone2 fix, open up the swatches section and look for the swatch used.
-
-![](https://user-images.githubusercontent.com/74399067/206912242-f084c8e5-5f21-461d-9932-585ba04259c3.png)
-
-In my instance, it is using the "Base Dust 01" swatch, with the listed values. Back in Blender, make sure to enter the proper values into boxes such as 
-- "Roughness/Roughness Black/Roughness White" which can be entered into the shader
-- "TopColor/MidColor/BotColor" which are R/G/B values (in order) which can be entered into the shader by clicking onto the color boxes.
-
-Any other values such as "ScratchColor" are currently not necessary.
-
-![](https://user-images.githubusercontent.com/74399067/206912513-3b355778-4873-4267-ba4b-e60460e1e984.png)
-
-### Part 6: Fixing the DustSwatch
-
-Some models use an additional zone called "Dust" inside mask1 to add detail to models, such as Chief's campaign model. These are found in the last entry in a regionlayer, and are usually empty with the default swatch being present: ```00000000```.
-
-Using the same steps as Part 5, you can enter the values for Dust just like Grime. However, even if your model has a swatch listed in its last layer, it still depends on the material used (see below). 
-
-**If the "material" inside your RegionLayer has "damage" inside it, such as "cvw_7_layered_damage", it means that it does. If it doesn't, you do not need to bother with this step.**
-
-If your model does in fact use Dust, make sure to enable it on the top of the blender shader by setting "Dust Amount" to 1.
-
-![](https://user-images.githubusercontent.com/74399067/206912842-9d3c2926-a85c-457e-be68-bee4a1458a24.png)
-![](https://user-images.githubusercontent.com/74399067/206913166-b113f49e-4fdc-4338-b6dd-1c8e48be981d.png)
-
-### Part 7: Entering Scaling Values
-
-Scaling in Infinite is done using 8 parameters, which can be found in the material and swatch tags in Infinite. For this step, we will need to open IRTV and again navigate to our .material tag. Here, open the "material parameters" tab and switch over to the second (1) entry.
-
-![](https://user-images.githubusercontent.com/74399067/206913682-32da2e28-3a39-4f6f-8010-3be6e788a4ed.gif)
-
-There are 4 values here which you need;
-- ```Real``` for "Base Scale X" in Blender
-- ```Vector X``` for "Base Scale Y" in Blender
-- ```Vector Y``` for "Material Transform X" in Blender
-- ```Vector Z``` for "Material Transform Y" in Blender
-
-For the remaining values, we'll need to open the ```.materialswatch``` tags in IRTV. Search for the swatch used in a zone, such "hum_plastic_painted" and open up the tag.
-
-![](https://user-images.githubusercontent.com/74399067/206914056-f0c3698e-ec5d-4584-8356-7d9727b64de7.png)
-
-
-There are 4 values here which you need;
-- ```ColorAndRoughnessTextureTransform X``` for "Gradient Scale X"
-- ```ColorAndRoughnessTextureTransform Y``` for "Gradient Scale Y"
-- ```NormalTextureTransform X``` for "Normal Scale X"
-- ```NormalTextureTransform Y``` for "Normal Scale Y"
-
-![](https://user-images.githubusercontent.com/74399067/206914769-673bafbb-d65b-4835-9fb3-234a730cd6a6.png)
 
 ## Congrats! Your model is now properly imported.
 
